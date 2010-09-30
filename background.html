@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <script type="text/javascript">
+      var data;
+      chrome.extension.onRequest.addListener( function (req) {
+        data = req;
+      });
+
+      chrome.contextMenus.create({
+        "type": "normal",
+        "title": "Copy Link Text",
+        "contexts": ["link"],
+        "onclick": function( link, tab ) {
+            var textarea = document.getElementById("tmp-clipboard");
+
+            // TODO: allow to set formats
+            var text = data.text;
+
+            if ( text ) {
+                textarea.value = text;
+
+                textarea.select();
+                document.execCommand("copy", false, null);
+            }
+        }
+    });
+    </script>
+  </head>
+  <body>
+    <textarea id="tmp-clipboard"></textarea>
+  </body>
+</html>

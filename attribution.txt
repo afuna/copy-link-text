@@ -1,0 +1,5 @@
+Extension idea inspired by the CoLT Firefox extension.
+Flow for successful copying based on Auto Copy Chrome extension.
+Icons are from http://www.doublejdesign.co.uk/2009/10/free-diagram-icon-set-part-2/.
+
+Much thanks to all!
