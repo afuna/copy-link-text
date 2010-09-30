@@ -1,10 +1,8 @@
-document.body.addEventListener("contextmenu", function(event) {
-    var ele = event.srcElement;
-
-    if ( ele.tagName == "A" ) {
+for( var i = 0; i < document.links.length; i++ ) {
+    document.links[i].addEventListener("contextmenu", function(event) {
         chrome.extension.sendRequest({
-            "text": ele.text
+            "text": this.text
         });
-    }
-}, true );
+    }, false );
+}
 
