@@ -1,8 +1,7 @@
-for( var i = 0; i < document.links.length; i++ ) {
-    document.links[i].addEventListener("contextmenu", function(event) {
+document.addEventListener( "contextmenu", function(event) {
+    if ( event.target.nodeName === "A" ) {
         chrome.extension.sendRequest({
-            "text": this.text
+            "text": event.target.innerText
         });
-    }, false );
-}
-
+    }
+}, false );
