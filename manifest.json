@@ -11,7 +11,7 @@
   ],
   "content_scripts" : [ {
     "all_frames": true,
-    "matches": ["<all_urls>"],
+    "matches": ["http://*/*", "https://*/*"],
     "js"     : ["menu.js"]
   } ],
   "background_page": "background.html"
