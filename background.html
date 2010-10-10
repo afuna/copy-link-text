@@ -8,7 +8,7 @@
 
       chrome.contextMenus.create({
         "type": "normal",
-        "title": "Copy Link Text",
+        "title": chrome.i18n.getMessage("contextMenu_command_copyText"),
         "contexts": ["link"],
         "onclick": function( link, tab ) {
             var textarea = document.getElementById("tmp-clipboard");

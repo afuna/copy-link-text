@@ -1,0 +1,11 @@
+{
+    "extName": {
+        "message": "Copy Link Text",
+        "description": "Extension name."
+    },
+
+    "contextMenu_command_copyText" : {
+        "message" : "Copy Link Text",
+        "description": "Command to copy the link text from the context menu."
+    }
+}

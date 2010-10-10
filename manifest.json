@@ -1,7 +1,9 @@
 {
-  "name": "Copy Link Text",
-  "description": "Right click >> copy link text (instead of link address)",
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDesc__",
   "version": "0.2",
+  "default_locale": "en",
+
   "icons": {
     "48"  : "diagram-icon48.png",
     "128" : "diagram-icon128.png"
