@@ -4,6 +4,11 @@
         "description": "Extension name."
     },
 
+    "extDesc": {
+        "message": "Right click >> copy link text (instead of link address)",
+        "description": "Extension description."
+    },
+
     "contextMenu_command_copyText" : {
         "message" : "Copy Link Text",
         "description": "Command to copy the link text from the context menu."
