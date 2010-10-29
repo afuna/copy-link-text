@@ -1,29 +1,13 @@
 <html>
   <head>
     <script type="text/javascript" src="format.js"></script>
+    <script type="text/javascript" src="options.js"></script>
     <script type="text/javascript">
-      var data;
       chrome.extension.onRequest.addListener( function (req) {
-        data = req;
+        sessionStorage["clicked"] = JSON.stringify(req);
       });
 
-
-      chrome.contextMenus.create({
-        "type": "normal",
-        "title": chrome.i18n.getMessage("contextMenu_command_copyText"), // TODO: more strings
-        "contexts": ["link"],
-        "onclick": function( link, tab ) {
-            var textarea = document.getElementById("tmp-clipboard");
-
-            var text = format( data, localStorage["outputformat"] );
-            if ( text ) {
-                textarea.value = text;
-
-                textarea.select();
-                document.execCommand("copy", false, null);
-            }
-        }
-    });
+      initContextMenus();
     </script>
   </head>
   <body>

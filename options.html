@@ -94,6 +94,7 @@
         }
 
     </style>
+    <script type="text/javascript" src="options.js"></script>
     <script type="text/javascript">
     function log(message) {
         document.getElementById("status").innerHTML = "<div class='message'>"+message+"</div>" + document.getElementById("status").innerHTML;
@@ -114,6 +115,10 @@
             options["custom"][ele.id] = ele.value;
         }
         localStorage["outputformats"] = JSON.stringify(options);
+
+        reInitContextMenus();
+
+        log("Your options have been saved.");
     }
 
 

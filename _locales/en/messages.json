@@ -9,8 +9,16 @@
         "description": "Extension description."
     },
 
-    "contextMenu_command_copyText" : {
+    "contextMenu_command_menu_text" : {
         "message" : "Copy Link Text",
-        "description": "Command to copy the link text from the context menu."
+        "description": "Context menu command to copy the link text."
+    },
+    "contextMenu_command_menu_html": {
+        "message": "Copy as HTML Link",
+        "description": "Context menu command to copy the link in HTML format."
+    },
+    "contextMenu_command_menu_mediawiki": {
+        "message": "Copy as Wiki Link",
+        "description": "Context menu command to copy the link in wiki format."
     }
 }
