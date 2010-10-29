@@ -1,0 +1,204 @@
+<html>
+  <head>
+    <style type='text/css'>
+        body {
+            background-color: #f5f5f5;
+            font-family: sans-serif;
+        }
+        #content {
+            margin: 3em 10em 0 3em;
+        }
+        .section {
+            background-color: #fff;
+            margin: 1em 0;
+        }
+
+
+        fieldset {
+            padding: 1em;
+            border: none;
+        }
+        legend {
+            padding: 0.5em 1em;
+            margin-left: -1em;
+            font-weight: bold;
+            background-color: #fff;
+            -webkit-box-shadow: 0 10px 5px #888;
+            width: 100%;
+        }
+
+        fieldset input[type='checkbox'] {
+            float: left;
+            clear: left;
+            height: 1.8em;
+        }
+        fieldset label {
+            float: left;
+            line-height: 1.8em;
+            padding-left: 0.5em;
+            text-align: right;
+            min-width: 8.5em;
+        }
+        fieldset input[type='text'] {
+            float: left;
+            margin: 0.5em 2em;
+            line-height: 1.5em;
+            max-width: 95%;
+        }
+        .format {
+            float: left;
+            padding: 0;
+        }
+
+        .note {
+            float: right;
+            margin-top: 0.5em;
+            font-size: 0.9em;
+            line-height: 1.3em;
+            padding: 1em;
+            outline: 4px #ccc solid;
+        }
+        .title {
+            font-weight: bold;
+        }
+        .variables var {
+            font-style: normal;
+        }
+        .variables dt {
+            float: left;
+            clear: left;
+            text-align: right;
+            min-width: 7em;
+        }
+        .variables dd {
+            font-size: 0.9em;
+            float: left;
+            margin-left: 1em;
+        }
+
+        #status {
+            max-height: 10em;
+            overflow: auto;
+        }
+
+        #status .message {
+            border-top: 1px #eee solid;
+            border-bottom: 1px #eee solid;
+            background-color: #fdfdfd;
+            padding: 1em 0.5em;
+        }
+
+        button {
+            height: 3em;
+            width: 100%;
+        }
+
+    </style>
+    <script type="text/javascript">
+    function log(message) {
+        document.getElementById("status").innerHTML = "<div class='message'>"+message+"</div>" + document.getElementById("status").innerHTML;
+    }
+
+    function save_options() {
+    }
+
+
+    function restore_options() {
+
+    }
+
+    var warned = false;
+    function register_multiple_warning() {
+        var elements = document.getElementsByName("outputformat");
+
+        for( var i in elements ) {
+            var input = elements[i];
+
+            input.addEventListener("change", function(event) {
+                if (warned)
+                    return;
+
+                var checked = 0;
+                for( var j in elements ) {
+                    if (elements[j].checked)
+                        checked++;
+                }
+
+                if ( checked > 1 ) {
+                    log("Note: Checking more than one format will create a second level of menus.");
+                    warned = 1;
+                }
+            }, false);
+        }
+    }
+
+    function init() {
+        restore_options();
+        register_multiple_warning();
+    }
+
+    </script>
+  </head>
+  <body onload="init()">
+    <div id='content'>
+        <fieldset class='section'>
+            <legend>Copy as...</legend>
+            <div class='note'><span class='title'>Variables:</span>
+            <dl class='variables'>
+                <dt><var>%%url%%</var></dt><dd>URL of the clicked link</dd>
+                <dt><var>%%text%%</var></dt><dd>Text of the clicked link</dd>
+                <dt><var>%%title%%</var></dt><dd>Title attribute of the link</dd>
+                <dt><var>%%pageurl%%</var></dt><dd>URL of the current page</dd>
+                <dt><var>%%pagetitle%%</var></dt><dd>Title of the current page</dd>
+            </dl></div>
+
+            <div class='format'>
+            <input type="checkbox" name="outputformat" id="text" /><label for="text">link text</label>
+            <input type="text" size="90" value="%%text%%" disabled="disabled" />
+            </div>
+
+            <div class='format'>
+            <input type="checkbox" name="outputformat" id="html" /><label for="html">HTML link</label>
+            <input type="text" size="90" value="&lt;a href=&quot;%%url%%&quot;>%%text%%&lt;/a>" disabled="disabled" />
+            </div>
+
+            <div class='format'>
+            <input type="checkbox" name="outputformat" id="mediawiki" /><label for="mediawiki">Wiki link</label>
+            <input type="text" size="90" value="[%%url%% %%text%%]" disabled="disabled" />
+            </div>
+
+            <div class='format'>
+            <input type="checkbox" name="outputformat" id="custom1" /><label for="custom1">Custom Format 1</label>
+            <input type="text" size="90" id="outputformat_text_custom1" class='values' />
+            </div>
+
+            <div class='format'>
+            <input type="checkbox" name="outputformat" id="custom2" /><label for="custom2">Custom Format 2</label>
+            <input type="text" size="90" id="outputformat_text_custom2" class='values' />
+            </div>
+
+            <div class='format'>
+            <input type="checkbox" name="outputformat" id="custom3" /><label for="custom3">Custom Format 3</label>
+            <input type="text" size="90" id="outputformat_text_custom3" class='values' />
+            </div>
+
+            <div class='format'>
+            <input type="checkbox" name="outputformat" id="custom4" /><label for="custom4">Custom Format 4</label>
+            <input type="text" size="90" id="outputformat_text_custom4" class='values' />
+            </div>
+
+            <div class='format'>
+            <input type="checkbox" name="outputformat" id="custom5" /><label for="custom5">Custom Format 5</label>
+            <input type="text" size="90" id="outputformat_text_custom5" class='values' />
+            </div>
+        </fieldset>
+    
+        <div class='section' id="actions">
+            <button onclick="save_options()">Save</button>
+        </div>
+    
+        <div class='section' id="status" aria-live=""></div>
+
+    </div>
+  </body>
+</html>
