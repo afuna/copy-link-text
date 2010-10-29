@@ -54,13 +54,15 @@ function save_options() {
     var elements = document.getElementsByName("outputformat");
     for(var i = 0; i < elements.length; i++) {
         var ele = elements[i];
-        options["enabled"][ele.id] = ele.checked;
+        if (ele.checked)
+            options["enabled"][ele.id] = true;
     }
 
     elements = document.getElementsByName("custom");
     for(var i = 0; i < elements.length; i++) {
         var ele = elements[i];
-        options["custom"][ele.id] = ele.value;
+        if(ele.value && ele.value != "")
+            options["custom"][ele.id] = ele.value;
     }
     localStorage["outputformats"] = JSON.stringify(options);
 
@@ -79,7 +81,7 @@ function get_saved_options() {
 
 function restore_options() {
     var options = get_saved_options();
-    
+
     for(var id in options["enabled"])
         document.getElementById(id).checked = options["enabled"][id];
 
