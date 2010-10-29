@@ -26,15 +26,17 @@ function init_context_menus() {
             "contexts": ["link"],
             "onclick": (function(output) {
                 return function( link, tab ) {
-                    var textarea = document.getElementById("tmp-clipboard");
+                    var doc = chrome.extension.getBackgroundPage().document;
+                    var textarea = doc.getElementById("tmp-clipboard");
 
-                    var text = format( JSON.parse(sessionStorage["clicked"]), output );
+                    var text = format( JSON.parse(localStorage["clicked"] || "{}"), output );
                     if ( text ) {
                         textarea.value = text;
 
                         textarea.select();
-                        document.execCommand("copy", false, null);
+                        doc.execCommand("copy", false, null);
                     }
+                    localStorage["clicked"].removeItem();
                 };
             })(outputformat)
           });
