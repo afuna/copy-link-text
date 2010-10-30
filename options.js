@@ -36,7 +36,7 @@ function init_context_menus() {
                         textarea.select();
                         doc.execCommand("copy", false, null);
                     }
-                    localStorage["clicked"].removeItem();
+                    localStorage.removeItem("clicked");
                 };
             })(outputformat)
           });
