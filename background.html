@@ -3,8 +3,14 @@
     <script type="text/javascript" src="format.js"></script>
     <script type="text/javascript" src="options.js"></script>
     <script type="text/javascript">
-      chrome.extension.onRequest.addListener( function (req) {
-        localStorage["clicked"] = JSON.stringify(req);
+      var lastClicked = {};
+      chrome.extension.onRequest.addListener(function (msg, sender, sendResponse) {
+            // close the previous connection
+            // in cases where user right-clicked, but didn't copy link text
+            if ( lastClicked["callback"] ) lastClicked["callback"]();
+
+            lastClicked["callback"] = sendResponse;
+            lastClicked["message"] = msg;
       });
 
       init_context_menus();

@@ -14,7 +14,8 @@
   "content_scripts" : [ {
     "all_frames": true,
     "matches": ["http://*/*", "https://*/*"],
-    "js"     : ["menu.js"]
+    "js"     : ["menu.js"],
+    "css"    : ["menu.css"]
   } ],
 
   "background_page": "background.html",

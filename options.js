@@ -26,17 +26,21 @@ function init_context_menus() {
             "contexts": ["link"],
             "onclick": (function(output) {
                 return function( link, tab ) {
-                    var doc = chrome.extension.getBackgroundPage().document;
+                    var win = chrome.extension.getBackgroundPage();
+                    var doc = win.document;
                     var textarea = doc.getElementById("tmp-clipboard");
 
-                    var text = format( JSON.parse(localStorage["clicked"] || "{}"), output );
+                    var text = format( win.lastClicked.message || {}, output );
                     if ( text ) {
                         textarea.value = text;
 
                         textarea.select();
                         doc.execCommand("copy", false, null);
                     }
-                    localStorage.removeItem("clicked");
+                    if(win.lastClicked.callback) {
+                        win.lastClicked.callback({action: "copied"});
+                    }
+                    win["lastClicked"] = {};
                 };
             })(outputformat)
           });
