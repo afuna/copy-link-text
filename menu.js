@@ -9,7 +9,7 @@ function extractLinkData (linkNode, page) {
 }
 
 var copiedClass = "copy-link-text-copied";
-var copiedClassRegex = new RegExp("\\b"+copiedClass+"\\b", "g");;
+var copiedClassRegex = new RegExp("\\b"+copiedClass+"\\b", "g");
 
 
 // listener is on the document so that we also handle links added after page load
@@ -23,14 +23,13 @@ document.addEventListener( "contextmenu", function(event) {
     while ( node && ( limit-- > 0 ) ) {
         if ( node.nodeName === "A" && node.href != undefined ) {
             chrome.extension.sendRequest(extractLinkData(node, document), function(msg){
+                if(msg && msg.action == "highlightCopied"){
+                    var oldCopied = document.getElementsByClassName(copiedClass)
+                    for ( var i = 0; i < oldCopied.length; i++ ) {
+                        oldCopied[i].className
+                            = oldCopied[i].className.replace( copiedClassRegex, "" );
+                    }
 
-                var oldCopied = document.getElementsByClassName(copiedClass)
-                for ( var i = 0; i < oldCopied.length; i++ ) {
-                    oldCopied[i].className
-                        = oldCopied[i].className.replace( copiedClassRegex, "" );
-                }
-
-                if(msg && msg.action == "copied"){
                     node.className += " " + copiedClass;
                 }
             });

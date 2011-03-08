@@ -37,8 +37,10 @@ function init_context_menus() {
                         textarea.select();
                         doc.execCommand("copy", false, null);
                     }
-                    if(win.lastClicked.callback) {
-                        win.lastClicked.callback({action: "copied"});
+
+                    var highlight = JSON.parse( localStorage["highlight"] );
+                    if( highlight && win.lastClicked.callback) {
+                        win.lastClicked.callback({action: "highlightCopied"});
                     }
                     win["lastClicked"] = {};
                 };
@@ -70,6 +72,8 @@ function save_options() {
     }
     localStorage["outputformats"] = JSON.stringify(options);
 
+    localStorage["highlight"] = document.getElementById("highlight").checked;
+
     reinit_context_menus();
 
     log("Your options have been saved.");
@@ -91,6 +95,10 @@ function restore_options() {
 
     for(var id in options["custom"])
         document.getElementById(id).value = options["custom"][id];
+
+    // default to enabled unless the user has explicitly set their option
+    document.getElementById("highlight").checked
+        = JSON.parse( localStorage["highlight"] || "true" );
 }
 
 var warned = false;
@@ -131,3 +139,4 @@ function init() {
     restore_options();
     register_multiple_warning();
 }
+
