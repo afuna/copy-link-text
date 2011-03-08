@@ -3,7 +3,7 @@ function extractLinkData (linkNode, page) {
         "linktext"  : linkNode.innerText,
         "linkurl"   : linkNode.href,
         "linktitle" : linkNode.title,
-        "pageurl"   : page.location.href,
+        "pageurl"   : page.location ? page.location.href : undefined,
         "pagetitle" : page.title
     }
 }
