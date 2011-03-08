@@ -31,7 +31,14 @@ function init_context_menus() {
                     var doc = win.document;
                     var textarea = doc.getElementById("tmp-clipboard");
 
-                    var text = format( win.lastClicked.message || {}, output );
+                    var message = win.lastClicked.message || {
+                        "linktext"  : link.selectionText,
+                        "linkurl"   : link.linkUrl,
+                        "linktitle" : undefined,
+                        "pageurl"   : tab.url,
+                        "pagetitle" : tab.title
+                    };
+                    var text = format( message, output );
                     if ( text ) {
                         textarea.value = text;
 
