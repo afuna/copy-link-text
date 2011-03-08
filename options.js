@@ -18,7 +18,7 @@ function init_context_menus() {
 
         var title = builtin
             ? chrome.i18n.getMessage("contextMenu_command_menu_"+formatType)
-            : formats["custom"][formatType+"_text"];
+            : formats["custom"][formatType+"_label"] || formats["custom"][formatType+"_text"];
 
         chrome.contextMenus.create({
             "type": "normal",
@@ -70,6 +70,13 @@ function save_options() {
         if(ele.value && ele.value != "")
             options["custom"][ele.id] = ele.value;
     }
+    elements = document.getElementsByName("custom_label");
+    for(var i = 0; i < elements.length; i++) {
+        var ele = elements[i];
+        if(ele.value && ele.value != "")
+            options["custom"][ele.id] = ele.value;
+    }
+
     localStorage["outputformats"] = JSON.stringify(options);
 
     localStorage["highlight"] = document.getElementById("highlight").checked;

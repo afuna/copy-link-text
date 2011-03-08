@@ -32,31 +32,55 @@
             clear: left;
             height: 1.8em;
         }
+
         fieldset label {
             float: left;
             line-height: 1.8em;
-            padding-left: 0.5em;
-            text-align: right;
-            min-width: 8.5em;
         }
-        fieldset input[type='text'] {
+        fieldset input[type="text"] {
             float: left;
-            margin: 0.5em 2em;
             line-height: 1.5em;
-            max-width: 95%;
         }
+
         .format {
             float: left;
             padding: 0;
         }
+        fieldset > div > label {
+            float: left;
+            padding-left: 0.5em;
+            text-align: right;
+            min-width: 7.5em;
+        }
+        fieldset > div > input[type='text'] {
+            margin: 0.5em 1em;
+            max-width: 95%;
+        }
+
+        .customformat {
+            float: left;
+            margin: 0 1em;
+        }
+        .customformat label {
+            font-style: italic;
+            color: #777;
+            font-size: 0.8em;
+            padding: 0 0.2em 0 1em;
+        }
+        .customformatlabel {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
 
         .note {
             float: right;
-            margin-top: 0.5em;
+            margin: 0.5em 0 0 2em;
             font-size: 0.9em;
             line-height: 1.3em;
             padding: 1em;
             outline: 4px #ccc solid;
+            background-color: #fff;
         }
         .title {
             font-weight: bold;
@@ -99,17 +123,18 @@
   </head>
   <body onload="init()">
     <div id='content'>
-        <fieldset class='section'>
-            <legend>Copy as...</legend>
-            <div class='note'><span class='title'>Variables:</span>
-            <dl class='variables'>
-                <dt><var>%%url%%</var></dt><dd>URL of the clicked link</dd>
-                <dt><var>%%text%%</var></dt><dd>Text of the clicked link</dd>
-                <dt><var>%%title%%</var></dt><dd>Title attribute of the link</dd>
-                <dt><var>%%pageurl%%</var></dt><dd>URL of the current page</dd>
-                <dt><var>%%pagetitle%%</var></dt><dd>Title of the current page</dd>
-            </dl></div>
+        <div class='note'><span class='title'>Variables:</span>
+        <dl class='variables'>
+            <dt><var>%%url%%</var></dt><dd>URL of the clicked link</dd>
+            <dt><var>%%text%%</var></dt><dd>Text of the clicked link</dd>
+            <dt><var>%%title%%</var></dt><dd>Title attribute of the link</dd>
+            <dt><var>%%pageurl%%</var></dt><dd>URL of the current page</dd>
+            <dt><var>%%pagetitle%%</var></dt><dd>Title of the current page</dd>
+        </dl></div>
 
+
+        <fieldset class='section' id="defaultformats">
+            <legend>Copy as...</legend>
             <div class='format'>
             <input type="checkbox" name="outputformat" id="text" /><label for="text">link text</label>
             <input type="text" size="90" value="%%text%%" disabled="disabled" />
@@ -124,33 +149,52 @@
             <input type="checkbox" name="outputformat" id="mediawiki" /><label for="mediawiki">wiki link</label>
             <input type="text" size="90" value="[%%url%% %%text%%]" disabled="disabled" />
             </div>
+        </fieldset>
 
+        <fieldset class="section" id="customformats">
+            <legend>Copy as custom format...</legend>
             <div class='format'>
             <input type="checkbox" name="outputformat" id="custom1" /><label for="custom1">Custom Format 1</label>
-            <input type="text" size="90" name="custom" id="custom1_text" />
+            <div class="customformat">
+                <label for="custom1_label">menu item</label><input type="text" placeholder="Custom Format" title="name in dropdown menu" name="custom_label" id="custom1_label" />
+                <label for="custom1_text" class="customformatlabel">format</label><input type="text" placeholder="%%text%% - %%url%%" size="90" name="custom" id="custom1_text" />
+            </div>
             </div>
 
             <div class='format'>
             <input type="checkbox" name="outputformat" id="custom2" /><label for="custom2">Custom Format 2</label>
-            <input type="text" size="90" name="custom" id="custom2_text" />
+            <div class="customformat">
+                <label for="custom2_label">menu item</label><input placeholder="Custom Format" title="name in dropdown menu" type="text" name="custom_label" id="custom2_label" />
+                <label for="custom2_text" class="customformatlabel">format</label><input type="text" placeholder="%%text%% - %%url%%" size="90" name="custom" id="custom2_text" />
+            </div>
             </div>
 
             <div class='format'>
             <input type="checkbox" name="outputformat" id="custom3" /><label for="custom3">Custom Format 3</label>
-            <input type="text" size="90" name="custom" id="custom3_text" />
+            <div class="customformat">
+                <label for="custom3_label">menu item</label><input placeholder="Custom Format" title="name in dropdown menu" type="text" name="custom_label" id="custom3_label" />
+                <label for="custom3_text" class="customformatlabel">format</label><input type="text" placeholder="%%text%% - %%url%%" size="90" name="custom" id="custom3_text" />
+            </div>
             </div>
 
             <div class='format'>
             <input type="checkbox" name="outputformat" id="custom4" /><label for="custom4">Custom Format 4</label>
-            <input type="text" size="90" name="custom" id="custom4_text" />
+            <div class="customformat">
+                <label for="custom4_label">menu item</label><input placeholder="Custom Format" title="name in dropdown menu" type="text" name="custom_label" id="custom4_label" />
+                <label for="custom4_text" class="customformatlabel">format</label><input type="text" placeholder="%%text%% - %%url%%" size="90" name="custom" id="custom4_text" />
+            </div>
             </div>
 
             <div class='format'>
             <input type="checkbox" name="outputformat" id="custom5" /><label for="custom5">Custom Format 5</label>
-            <input type="text" size="90" name="custom" id="custom5_text" />
+            <div class="customformat">
+                <label for="custom5_label">menu item</label><input placeholder="Custom Format" title="name in dropdown menu" type="text" name="custom_label" id="custom5_label" />
+                <label for="custom5_text" class="customformatlabel">format</label><input type="text" placeholder="%%text%% - %%url%%" size="90" name="custom" id="custom5_text" />
+            </div>
             </div>
         </fieldset>
-        <fieldset class="section">
+
+        <fieldset class="section" id="misc">
             <legend>Misc</legend>
             <div>
             <input type="checkbox" name="highlight" id="highlight" /><label for="highlight">Highlight link after copy</label>
