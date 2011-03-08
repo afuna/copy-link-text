@@ -24,6 +24,7 @@ function init_context_menus() {
             "type": "normal",
             "title": title,
             "contexts": ["link"],
+            "documentUrlPatterns": ["http://*/*", "https://*/*"],
             "onclick": (function(output) {
                 return function( link, tab ) {
                     var win = chrome.extension.getBackgroundPage();
