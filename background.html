@@ -7,7 +7,11 @@
       chrome.extension.onRequest.addListener(function (msg, sender, sendResponse) {
             // close the previous connection
             // in cases where user right-clicked, but didn't copy link text
-            if ( lastClicked["callback"] ) lastClicked["callback"]();
+            // if we right-click somewhere (for another reason) then close the tab
+            // we end up trying to use a disconnected port object which breaks the extension entirely
+            // so leave off for now
+            // TODO: figure out how to cleanup
+            // if ( lastClicked["callback"] ) lastClicked["callback"]();
 
             lastClicked["callback"] = sendResponse;
             lastClicked["message"] = msg;
